@@ -1,0 +1,14 @@
+{{>layouts/header}}
+<div>
+
+    이 페이지는 show입니다.br
+    <br>
+{{#article}}
+{{id}} {{title}} {{!content}}
+{{/article}}
+    <br>
+    <a href="/articles/new">다시 작성</a>
+    <a href="/articles/"> 리스트</a>
+
+</div>
+{{>layouts/footer}}

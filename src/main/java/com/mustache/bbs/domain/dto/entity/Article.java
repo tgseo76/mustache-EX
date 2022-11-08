@@ -15,10 +15,10 @@ public class Article {
     @GeneratedValue //자동 생성 아아디 0분부터 자동으로 넣어준다
     private Long id;
     private String title;
-    private String contents;
+    private String content;
 
-    public Article(String title, String contents) {
+    public Article(String title, String content) {
         this.title = title;
-        this.contents = contents;
+        this.content = content;
     }
 }

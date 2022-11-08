@@ -1,8 +1,32 @@
 {{>layouts/header}}
 <form action="/articles/posts" method="post">
-    <input type="text" name="title">
-    <input type="text" name="content">
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div>
+        title입력하세요
+        <br>
+        <input type="text" name="title">
+    </div>
+    <div>
+        content입력하세요
+        <br>
+        <input type="text" name="content">
+    </div>
+
+    <button style="margin-top: 10px" type="submit" class="btn btn-primary">Submit</button>
     <a href="/articles">back</a>
-</form>
 {{>layouts/footer}}
+
+
+<!--<form action="/articles/posts" method="post">-->
+<!--    <div class="mb-3">-->
+<!--        <label for="exampleInputEmail1" class="form-label">title</label>-->
+<!--        <input type="text" class="form-control" id="title" aria-describedby="emailHelp">-->
+<!--        <div id="emailHelp" class="form-text">제목을 입력하세요.</div>-->
+<!--    </div>-->
+<!--    <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--</form>-->
+
+
+<!--<input type="text" name="title">-->
+<!--<input type="text" name="content">-->
+<!--<button type="submit" class="btn btn-primary">Submit</button>-->
+<!--<a href="/articles">back</a>-->
