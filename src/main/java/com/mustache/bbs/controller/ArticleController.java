@@ -1,18 +1,16 @@
 package com.mustache.bbs.controller;
 
-import com.mustache.bbs.domain.dto.dto.ArticleDto;
-import com.mustache.bbs.domain.dto.entity.Article;
+import com.mustache.bbs.domain.dto.ArticleDto;
+import com.mustache.bbs.domain.entity.Article;
 import com.mustache.bbs.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Controller
 @RequestMapping("/articles")
@@ -56,6 +54,20 @@ public class ArticleController {
         }
     }
 
+    @GetMapping("/{id}/edit")
+    public String delete(@PathVariable Long id, Model model) {
+        Optional<Article> optionalArticle = articleRepository.findById(id);
+
+        if (!optionalArticle.isEmpty()) {
+            // Optional.get() ---> Article
+            model.addAttribute("article", optionalArticle.get());
+            return "/articles/edit";
+        } else {
+            model.addAttribute("message", String.format("%d가 없습니다",id));
+            return "/articles/error";
+        }
+    }
+
 
     @PostMapping(value = "/posts")
     public String createArticle(ArticleDto form) {
@@ -65,8 +77,7 @@ public class ArticleController {
         articleRepository.save(article);
         return String.format("redirect:/articles/%d", article.getId());
     }
-
-//    @PostMapping(value = "/posts")
+    //    @PostMapping(value = "/posts")
 //    public String createArticle(ArticleDto form) {
 //        // 실무에서 println 안씀 로그를 쓴다(서버에서 일어나는 일을 기록하는것)
 //        log.info(form.toString());
@@ -83,5 +94,21 @@ public class ArticleController {
 //        // souf %d %s
 //        return String.format("redirect:/articles/%d", savedArticle.getId());
 //    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable Long id, ArticleDto articleDto, Model model) {
+        log.info("title:{} content:{}", articleDto.getTitle(), articleDto.getContent());
+        Article article = articleRepository.save(articleDto.toEntity());
+        model.addAttribute("article", article);
+        return String.format("redirect:/articles/%d",article.getId());
+    }
+//삭제
+    @GetMapping("/{id}/delete")
+    public String edit(@PathVariable Long id){
+        articleRepository.deleteById(id);
+        return "redirect:/articles";
+    }
+
+
 }
 

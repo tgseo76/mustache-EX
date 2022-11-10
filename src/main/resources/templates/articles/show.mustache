@@ -1,14 +1,19 @@
 {{>layouts/header}}
 <div>
 
-    이 페이지는 show입니다.br
+    이 페이지는 show입니다.
     <br>
 {{#article}}
-{{id}} {{title}} {{!content}}
-{{/article}}
+{{id}} {{title}} {{content}}
+
     <br>
     <a href="/articles/new">다시 작성</a>
     <a href="/articles/"> 리스트</a>
-
+<!--    <a href="/articles/{{id}}/edit" class="btn btn-danger">수정</a>-->
+{{/article}}
 </div>
+
+<a href="/articles/{{id}}/edit" class="btn btn-primary">Edit</a>
+<a href="/articles/{{id}}/delete" class="btn btn-danger">Delete</a>
+
 {{>layouts/footer}}
