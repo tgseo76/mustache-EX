@@ -102,6 +102,7 @@ public class ArticleController {
         model.addAttribute("article", article);
         return String.format("redirect:/articles/%d",article.getId());
     }
+
 //삭제
     @GetMapping("/{id}/delete")
     public String edit(@PathVariable Long id){
