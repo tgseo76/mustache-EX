@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-@Controller
+@Controller //@RestController
 @RequestMapping("/articles")
 @Slf4j //log 사용할수있는 어노테이션
 public class ArticleController {
@@ -30,6 +30,7 @@ public class ArticleController {
         model.addAttribute("articles",articles);
         return "articles/list";
     }
+
 
     @GetMapping("")
     public String index(){
