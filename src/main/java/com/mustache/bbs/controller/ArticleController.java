@@ -1,7 +1,6 @@
 package com.mustache.bbs.controller;
 
 import com.mustache.bbs.domain.dto.ArticleDto;
-import com.mustache.bbs.domain.entity.Article;
 import com.mustache.bbs.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,7 @@ public class ArticleController {
 
     @GetMapping("/list")
     public String list(Model model){
-        List<Article> articles=articleRepository.findAll();
+        List<Article111> articles=articleRepository.findAll();
         model.addAttribute("articles",articles);
         return "articles/list";
     }
@@ -44,7 +43,7 @@ public class ArticleController {
 
     @GetMapping("/{id}")
     public String selectSingle(@PathVariable Long id, Model model) {
-        Optional<Article> optArticle = articleRepository.findById(id);
+        Optional<Article111> optArticle = articleRepository.findById(id);
 
         if (!optArticle.isEmpty()) {
             // Optional.get() ---> Article
@@ -57,7 +56,7 @@ public class ArticleController {
 
     @GetMapping("/{id}/edit")
     public String delete(@PathVariable Long id, Model model) {
-        Optional<Article> optionalArticle = articleRepository.findById(id);
+        Optional<Article111> optionalArticle = articleRepository.findById(id);
 
         if (!optionalArticle.isEmpty()) {
             // Optional.get() ---> Article
@@ -74,7 +73,7 @@ public class ArticleController {
     public String createArticle(ArticleDto form) {
         // 실무에서 println 안씀 로그를 쓴다(서버에서 일어나는 일을 기록하는것)
         log.info(form.toString());
-        Article article = form.toEntity();
+        Article111 article = form.toEntity();
         articleRepository.save(article);
         return String.format("redirect:/articles/%d", article.getId());
     }
@@ -99,7 +98,7 @@ public class ArticleController {
     @PostMapping("/{id}/update")
     public String update(@PathVariable Long id, ArticleDto articleDto, Model model) {
         log.info("title:{} content:{}", articleDto.getTitle(), articleDto.getContent());
-        Article article = articleRepository.save(articleDto.toEntity());
+        Article111 article = articleRepository.save(articleDto.toEntity());
         model.addAttribute("article", article);
         return String.format("redirect:/articles/%d",article.getId());
     }
